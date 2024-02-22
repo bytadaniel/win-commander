@@ -1,6 +1,7 @@
 import express from "express";
 import { Commander } from "./commander";
 
+const PORT = process.env.PORT || 5050;
 const app = express();
 const commander = new Commander();
 
@@ -20,4 +21,4 @@ app.post("/reboot", async (req, res) => {
     .catch(() => res.sendStatus(500));
 });
 
-app.listen(8083);
+app.listen(PORT, () => console.log("Start server on port", PORT));
