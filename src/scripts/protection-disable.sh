@@ -1,1 +1,0 @@
-echo "Disable protection shell script mock"

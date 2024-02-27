@@ -24,6 +24,20 @@ app.post("/device/reboot", async (req, res) => {
     .catch((e) => res.status(500).send(e));
 });
 
+app.post("/alt-tab/enable", async (req, res) => {
+  await commands
+    .altTabEnable()
+    .then(() => res.sendStatus(200))
+    .catch((e) => res.status(500).send(e));
+});
+
+app.post("/alt-tab/disable", async (req, res) => {
+  await commands
+    .altTabDisable()
+    .then(() => res.sendStatus(200))
+    .catch((e) => res.status(500).send(e));
+});
+
 app.post("/protection/enable", async (req, res) => {
   await commands
     .protectionEnable()

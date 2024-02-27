@@ -5,7 +5,7 @@ export class ProtectionEnableCommand {
   public async execute(): Promise<void> {
     return new Promise<void>((resolve) => {
       exec(
-        path.resolve(__dirname, "../scripts/protection-disable.sh"),
+        path.resolve(__dirname, "../scripts/protection-enable.exe"),
         (error, stdout, stderr) => {
           console.log("ProtectionEnableCommand", {
             error,
