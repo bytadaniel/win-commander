@@ -1,6 +1,6 @@
 import { reboot } from "../libs/node-shutdown-windows";
 
-export class RebootCommand {
+export class DeviceRebootCommand {
   public async execute(): Promise<void> {
     await new Promise<void>((resolve) => {
       const process = reboot(0, true);
