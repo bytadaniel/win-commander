@@ -50,7 +50,10 @@ export class GetProtectionStatusQuery {
 
     return new Promise<boolean>((resolve) => {
       registry.values((error, items) => {
-        console.log({ error, items });
+        console.log({
+          items,
+          type: typeof items,
+        });
 
         // items is null in case we have no access ro windown registry
         resolve(typeof items === "object");
