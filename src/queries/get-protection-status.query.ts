@@ -37,8 +37,7 @@ export class GetProtectionStatusQuery {
   private async getDeviceProtectionTools(): Promise<number> {
     const registry = new Registry({
       hive: Registry.HKCU,
-      // key: "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-      key:  '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
+      key: "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
     });
 
     await new Promise<void>((resolve, reject) => {
