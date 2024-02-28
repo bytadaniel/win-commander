@@ -1,3 +1,5 @@
+import path from "path";
+import fs from "fs";
 import express from "express";
 import { Commands } from "./commands";
 import { Queries } from "./queries";
@@ -72,3 +74,7 @@ app.get("/protection/status", async (req, res) => {
 });
 
 app.listen(PORT, () => console.log("Start server on port", PORT));
+
+console.log(__dirname);
+console.log(fs.readdirSync(__dirname));
+console.log(fs.readdirSync(path.resolve(__dirname, "../")));
