@@ -53,6 +53,7 @@ export class GetProtectionStatusQuery {
         console.log({
           items,
           type: typeof items,
+          bool: Boolean(items)
         });
 
         // items is null in case we have no access ro windown registry
