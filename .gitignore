@@ -1,6 +1,6 @@
 node_modules
+
 build
-pc-commander.blob
-pc-commander
-pc-commander
 bundle.js
+
+pc-commander*
