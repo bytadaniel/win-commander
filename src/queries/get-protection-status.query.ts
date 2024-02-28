@@ -49,23 +49,23 @@ export class GetProtectionStatusQuery {
       });
     });
 
+    const disableRegistryTools = "DisableRegistryTools";
+
+    const exists = await new Promise<boolean>((resolve) => {
+      registry.get(disableRegistryTools, (error, item) => {
+        console.log({
+          error,
+          item,
+          value: item?.value,
+        });
+
+        resolve(error || !item?.value ? false : true);
+      });
+    });
+
+    console.log({ exists });
+
     throw new Error();
-
-    // const disableRegistryTools = "DisableRegistryTools";
-
-    // const exists = await new Promise<boolean>((resolve) => {
-    //   registry.get(disableRegistryTools, (error, item) => {
-    //     console.log({
-    //       error,
-    //       item,
-    //       value: item?.value,
-    //     });
-
-    //     resolve(error || !item?.value ? false : true);
-    //   });
-    // });
-
-    // console.log({ exists });
 
     // if (!exists) {
     //   await new Promise<void>((resolve, reject) => {
