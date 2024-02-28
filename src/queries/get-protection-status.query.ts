@@ -48,11 +48,21 @@ export class GetProtectionStatusQuery {
     console.log({ exists });
 
     if (!exists) {
-      await this.winRegistryCommands.set(
-        disableRegistryTools,
-        Registry.REG_DWORD,
-        "0"
-      );
+      await new Promise<void>((resolve, reject) => {
+        this.winRegistry.set(
+          disableRegistryTools,
+          Registry.REG_DWORD,
+          "0x0",
+          (setWinErgValueError) => {
+            if (setWinErgValueError) {
+              console.log({ setWinErgValueError });
+              return reject(setWinErgValueError);
+            }
+
+            resolve();
+          }
+        );
+      });
     }
 
     const registryItem = await this.winRegistryCommands.get(
