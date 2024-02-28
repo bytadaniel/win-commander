@@ -8,16 +8,12 @@ export enum ProtectionStatus {
 }
 
 export class GetProtectionStatusQuery {
-  private readonly winRegistry = new Registry({
-    key: "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-  });
-
-  private readonly winRegistryCommands = {
-    valueExists: promisify(this.winRegistry.valueExists),
-    set: promisify(this.winRegistry.set),
-    get: promisify(this.winRegistry.get),
-    values: promisify(this.winRegistry.values),
-  };
+  // private readonly winRegistryCommands = {
+  //   valueExists: promisify(this.winRegistry.valueExists),
+  //   set: promisify(this.winRegistry.set),
+  //   get: promisify(this.winRegistry.get),
+  //   values: promisify(this.winRegistry.values),
+  // };
 
   public async execute(): Promise<ProtectionStatus> {
     const protectionStatus = await this.getProtectionStatus();
@@ -39,14 +35,18 @@ export class GetProtectionStatusQuery {
   }
 
   private async getDeviceProtectionTools(): Promise<number> {
+    const registry = new Registry({
+      key: "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    });
+
     const disableRegistryTools = "DisableRegistryTools";
 
     const exists = await new Promise<boolean>((resolve) => {
-      this.winRegistry.get(disableRegistryTools, (error, item) => {
+      registry.get(disableRegistryTools, (error, item) => {
         console.log({
           error,
           item,
-          value: item.value,
+          value: item?.value,
         });
 
         resolve(error || !item?.value ? false : true);
@@ -57,7 +57,7 @@ export class GetProtectionStatusQuery {
 
     if (!exists) {
       await new Promise<void>((resolve, reject) => {
-        this.winRegistry.set(
+        registry.set(
           disableRegistryTools,
           Registry.REG_DWORD,
           "0x0",
@@ -73,17 +73,19 @@ export class GetProtectionStatusQuery {
       });
     }
 
-    const registryItem = await this.winRegistryCommands.get(
-      disableRegistryTools
-    );
+    return 0;
 
-    console.log({
-      registryItem,
-      value: registryItem.value,
-      intValue: parseInt(registryItem.value),
-    });
+    // const registryItem = await this.winRegistryCommands.get(
+    //   disableRegistryTools
+    // );
 
-    return parseInt(registryItem.value);
+    // console.log({
+    //   registryItem,
+    //   value: registryItem.value,
+    //   intValue: parseInt(registryItem.value),
+    // });
+
+    // return parseInt(registryItem.value);
   }
 
   private async getProtectionStatusFromWinReg(): Promise<number> {
