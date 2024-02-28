@@ -29,13 +29,17 @@ export class GetProtectionStatusQuery {
   private async getProtectionStatusFromWinReg(): Promise<number> {
     const registry = new Registry({
       hive: Registry.HKCU,
-      //key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-      key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      // key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
     });
 
     await new Promise<void>((resolve) => {
       registry.values((err, items) => {
-        console.log({ err, items });
+        console.log({
+          err,
+          items,
+          values: items.map((item) => [item.name, item.value]),
+        });
         resolve();
       });
     });
