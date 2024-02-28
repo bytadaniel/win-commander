@@ -41,9 +41,11 @@ export class GetProtectionStatusQuery {
   private async getDeviceProtectionTools(): Promise<number> {
     const disableRegistryTools = "DisableRegistryTools";
 
-    const exists = await this.winRegistryCommands.valueExists(
-      disableRegistryTools
-    );
+    const exists = await new Promise<boolean>((resolve) => {
+      this.winRegistry.get(disableRegistryTools, (error, item) => {
+        resolve(error || !item?.value ? false : true);
+      });
+    });
 
     console.log({ exists });
 
