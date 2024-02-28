@@ -2,8 +2,11 @@
   "name": "win-commander",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
+    "build": "npx esbuild src/index.ts --bundle --platform=node --outfile=bundle.js",
+    "build:osx": "npm run build && sh make/osx.sh",
+    "build:win": "npm run build && sh make/win.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
