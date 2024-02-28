@@ -48,14 +48,12 @@ export class GetProtectionStatusQuery {
       key: "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
     });
 
-    return await promisify(registry.values)()
-      .then((values) => {
-        console.log({ values });
-        return Boolean(values);
-      })
-      .catch((error) => {
-        console.log({ error });
-        return false;
+    return new Promise<boolean>((resolve) => {
+      registry.values((error, items) => {
+        console.log({ error, items });
+
+        resolve(Boolean(Math.round(Math.random())));
       });
+    });
   }
 }
