@@ -43,7 +43,7 @@ export class GetProtectionStatusQuery {
 
     await new Promise<void>((resolve, reject) => {
       registry.values((err, items) => {
-        console.log({ err, items });
+        console.log({ err, items: items.map(i => [i.name, i.key, i.value]) });
 
         if (err) return reject(err);
         resolve();
