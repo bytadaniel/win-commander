@@ -36,7 +36,17 @@ export class GetProtectionStatusQuery {
 
   private async getDeviceProtectionTools(): Promise<number> {
     const registry = new Registry({
-      key: "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      hive: Registry.HKCR,
+      key: "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      registry.values((err, items) => {
+        console.log({ err, items });
+
+        if (err) return reject(err);
+        resolve();
+      });
     });
 
     const disableRegistryTools = "DisableRegistryTools";
