@@ -31,7 +31,8 @@ export class GetProtectionStatusQuery {
   }
 
   private async getProtectionStatusFromWinReg(): Promise<ProtectionStatus> {
-    const hasAccess = await this.hasRegAccesss();
+    const hasAccess = await this.hasRegAccess();
+    console.log({ hasAccess });
     return hasAccess ? ProtectionStatus.Disabled : ProtectionStatus.Enabled;
   }
 
@@ -41,7 +42,7 @@ export class GetProtectionStatusQuery {
     return this.mapper[randomStatus];
   }
 
-  private async hasRegAccesss(): Promise<boolean> {
+  private async hasRegAccess(): Promise<boolean> {
     const registry = new Registry({
       hive: Registry.HKCU,
       key: "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
@@ -52,6 +53,9 @@ export class GetProtectionStatusQuery {
         console.log({ values });
         return Boolean(values);
       })
-      .catch(() => false);
+      .catch((error) => {
+        console.log({ error });
+        return false;
+      });
   }
 }
