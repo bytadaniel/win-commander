@@ -52,7 +52,8 @@ export class GetProtectionStatusQuery {
       registry.values((error, items) => {
         console.log({ error, items });
 
-        resolve(Boolean(Math.round(Math.random())));
+        // items is null in case we have no access ro windown registry
+        resolve(typeof items === "object");
       });
     });
   }
