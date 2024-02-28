@@ -49,15 +49,13 @@ export class GetProtectionStatusQuery {
     });
 
     return new Promise<boolean>((resolve) => {
-      registry.values((error, items) => {
-        console.log({
-          items,
-          type: typeof items,
-          bool: Boolean(items)
+      registry.values((error, registryItems) => {
+        console.log("GetProtectionStatusQuery", {
+          registryItems,
         });
 
         // items is null in case we have no access ro windown registry
-        resolve(typeof items === "object");
+        resolve(Boolean(registryItems));
       });
     });
   }
