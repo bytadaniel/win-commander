@@ -24,6 +24,15 @@ app.post("/device/reboot", async (req, res) => {
     .catch((e) => res.status(500).send(e));
 });
 
+app.get("/device/mac-address", (req, res) => {
+  try {
+    const macAddress = queries.macAddress();
+    res.status(200).json({ macAddress });
+  } catch (e) {
+    res.status(500).send(e)
+  }
+});
+
 app.post("/alt-tab/enable", async (req, res) => {
   await commands
     .altTabEnable()

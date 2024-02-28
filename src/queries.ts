@@ -1,3 +1,4 @@
+import { GetMacAddressQuery } from "./queries/get-mac-address.query";
 import {
   GetProtectionStatusQuery,
   ProtectionStatus,
@@ -5,8 +6,13 @@ import {
 
 export class Queries {
   private readonly getProtectionStatusQuery = new GetProtectionStatusQuery();
+  private readonly getMacAddressQuery = new GetMacAddressQuery();
 
   public protectionStatus(): Promise<ProtectionStatus> {
     return this.getProtectionStatusQuery.execute();
+  }
+
+  public macAddress(): string {
+    return this.getMacAddressQuery.execute()
   }
 }
