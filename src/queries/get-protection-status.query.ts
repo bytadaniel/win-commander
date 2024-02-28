@@ -36,8 +36,9 @@ export class GetProtectionStatusQuery {
 
   private async getDeviceProtectionTools(): Promise<number> {
     const registry = new Registry({
-      hive: Registry.HKCR,
-      key: "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      hive: Registry.HKCU,
+      // key: "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      key:  '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
     });
 
     await new Promise<void>((resolve, reject) => {
@@ -49,41 +50,43 @@ export class GetProtectionStatusQuery {
       });
     });
 
-    const disableRegistryTools = "DisableRegistryTools";
+    throw new Error();
 
-    const exists = await new Promise<boolean>((resolve) => {
-      registry.get(disableRegistryTools, (error, item) => {
-        console.log({
-          error,
-          item,
-          value: item?.value,
-        });
+    // const disableRegistryTools = "DisableRegistryTools";
 
-        resolve(error || !item?.value ? false : true);
-      });
-    });
+    // const exists = await new Promise<boolean>((resolve) => {
+    //   registry.get(disableRegistryTools, (error, item) => {
+    //     console.log({
+    //       error,
+    //       item,
+    //       value: item?.value,
+    //     });
 
-    console.log({ exists });
+    //     resolve(error || !item?.value ? false : true);
+    //   });
+    // });
 
-    if (!exists) {
-      await new Promise<void>((resolve, reject) => {
-        registry.set(
-          disableRegistryTools,
-          Registry.REG_DWORD,
-          "0x0",
-          (setWinErgValueError) => {
-            if (setWinErgValueError) {
-              console.log({ setWinErgValueError });
-              return reject(setWinErgValueError);
-            }
+    // console.log({ exists });
 
-            resolve();
-          }
-        );
-      });
-    }
+    // if (!exists) {
+    //   await new Promise<void>((resolve, reject) => {
+    //     registry.set(
+    //       disableRegistryTools,
+    //       Registry.REG_DWORD,
+    //       "0x0",
+    //       (setWinErgValueError) => {
+    //         if (setWinErgValueError) {
+    //           console.log({ setWinErgValueError });
+    //           return reject(setWinErgValueError);
+    //         }
 
-    return 0;
+    //         resolve();
+    //       }
+    //     );
+    //   });
+    // }
+
+    // return 0;
 
     // const registryItem = await this.winRegistryCommands.get(
     //   disableRegistryTools
