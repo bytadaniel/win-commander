@@ -1,1 +1,0 @@
-echo "Ping protection shell script mock"

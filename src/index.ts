@@ -26,10 +26,9 @@ app.post("/device/reboot", async (req, res) => {
 
 app.get("/device/mac-address", (req, res) => {
   try {
-    const macAddress = queries.macAddress();
-    res.status(200).json({ macAddress });
+    res.status(200).json(queries.macAddress());
   } catch (e) {
-    res.status(500).send(e)
+    res.status(500).send(e);
   }
 });
 
@@ -64,8 +63,8 @@ app.post("/protection/disable", async (req, res) => {
 app.get("/protection/status", async (req, res) => {
   await queries
     .protectionStatus()
-    .then((status) => {
-      res.status(200).json({ status });
+    .then((data) => {
+      res.status(200).json(data);
     })
     .catch((e) => {
       res.status(500).send(e);
