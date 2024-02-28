@@ -43,6 +43,12 @@ export class GetProtectionStatusQuery {
 
     const exists = await new Promise<boolean>((resolve) => {
       this.winRegistry.get(disableRegistryTools, (error, item) => {
+        console.log({
+          error,
+          item,
+          value: item.value,
+        });
+
         resolve(error || !item?.value ? false : true);
       });
     });
