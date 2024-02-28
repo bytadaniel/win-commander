@@ -26,10 +26,18 @@ export class GetProtectionStatusQuery {
       : this.getMockedProtectionStatus();
   }
 
-  private getProtectionStatusFromWinReg(): Promise<number> {
+  private async getProtectionStatusFromWinReg(): Promise<number> {
     const registry = new Registry({
       hive: Registry.HKCU,
-      key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      //key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    });
+
+    await new Promise<void>((resolve) => {
+      registry.values((err, items) => {
+        console.log({ err, items });
+        resolve();
+      });
     });
 
     return new Promise<number>((resolve, reject) => {
