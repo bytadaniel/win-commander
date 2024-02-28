@@ -48,7 +48,10 @@ export class GetProtectionStatusQuery {
     });
 
     return await promisify(registry.values)()
-      .then(Boolean)
+      .then((values) => {
+        console.log({ values });
+        return Boolean(values);
+      })
       .catch(() => false);
   }
 }
