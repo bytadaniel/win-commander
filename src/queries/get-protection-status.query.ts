@@ -65,25 +65,25 @@ export class GetProtectionStatusQuery {
 
     console.log({ exists });
 
-    throw new Error();
+    if (!exists) {
+      await new Promise<void>((resolve, reject) => {
+        registry.set(
+          disableRegistryTools,
+          Registry.REG_DWORD,
+          "0x0",
+          (setWinErgValueError) => {
+            if (setWinErgValueError) {
+              console.log({ setWinErgValueError });
+              return reject(setWinErgValueError);
+            }
 
-    // if (!exists) {
-    //   await new Promise<void>((resolve, reject) => {
-    //     registry.set(
-    //       disableRegistryTools,
-    //       Registry.REG_DWORD,
-    //       "0x0",
-    //       (setWinErgValueError) => {
-    //         if (setWinErgValueError) {
-    //           console.log({ setWinErgValueError });
-    //           return reject(setWinErgValueError);
-    //         }
+            resolve();
+          }
+        );
+      });
+    }
 
-    //         resolve();
-    //       }
-    //     );
-    //   });
-    // }
+    return 0;
 
     // return 0;
 
