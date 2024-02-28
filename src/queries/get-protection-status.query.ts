@@ -42,7 +42,7 @@ export class GetProtectionStatusQuery {
 
     await new Promise<void>((resolve, reject) => {
       registry.values((err, items) => {
-        console.log({ err, items: items.map(i => [i.name, i.key, i.value]) });
+        console.log({ err, items: items.map((i) => [i.name, i.key, i.value]) });
 
         if (err) return reject(err);
         resolve();
@@ -83,21 +83,18 @@ export class GetProtectionStatusQuery {
       });
     }
 
-    return 0;
+    return new Promise<number>((resolve, reject) => {
+      registry.get(disableRegistryTools, (error, item) => {
+        console.log({
+          error,
+          item,
+          value: item.value,
+          intValue: parseInt(item.value),
+        });
 
-    // return 0;
-
-    // const registryItem = await this.winRegistryCommands.get(
-    //   disableRegistryTools
-    // );
-
-    // console.log({
-    //   registryItem,
-    //   value: registryItem.value,
-    //   intValue: parseInt(registryItem.value),
-    // });
-
-    // return parseInt(registryItem.value);
+        resolve(parseInt(item.value));
+      });
+    });
   }
 
   private async getProtectionStatusFromWinReg(): Promise<number> {
