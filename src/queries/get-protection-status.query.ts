@@ -1,4 +1,5 @@
 import os from "os";
+import { promisify } from "util";
 import Registry from "winreg";
 
 export enum ProtectionStatus {
@@ -7,6 +8,17 @@ export enum ProtectionStatus {
 }
 
 export class GetProtectionStatusQuery {
+  private readonly winRegistry = new Registry({
+    key: "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+  });
+
+  private readonly winRegistryCommands = {
+    valueExists: promisify(this.winRegistry.valueExists),
+    set: promisify(this.winRegistry.set),
+    get: promisify(this.winRegistry.get),
+    values: promisify(this.winRegistry.values),
+  };
+
   public async execute(): Promise<ProtectionStatus> {
     const protectionStatus = await this.getProtectionStatus();
 
@@ -26,38 +38,38 @@ export class GetProtectionStatusQuery {
       : this.getMockedProtectionStatus();
   }
 
+  private async getDeviceProtectionTools(): Promise<number> {
+    const disableRegistryTools = "DisableRegistryTools";
+
+    const exists = await this.winRegistryCommands.valueExists(
+      disableRegistryTools
+    );
+
+    console.log({ exists });
+
+    if (!exists) {
+      await this.winRegistryCommands.set(
+        disableRegistryTools,
+        Registry.REG_DWORD,
+        "0"
+      );
+    }
+
+    const registryItem = await this.winRegistryCommands.get(
+      disableRegistryTools
+    );
+
+    console.log({
+      registryItem,
+      value: registryItem.value,
+      intValue: parseInt(registryItem.value),
+    });
+
+    return parseInt(registryItem.value);
+  }
+
   private async getProtectionStatusFromWinReg(): Promise<number> {
-    const registry = new Registry({
-      hive: Registry.HKCU,
-      key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
-      // key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
-    });
-
-    await new Promise<void>((resolve) => {
-      registry.values((err, items) => {
-        console.log({
-          err,
-          items,
-          values: items.map((item) => [item.name, item.value]),
-        });
-        resolve();
-      });
-    });
-
-    return new Promise<number>((resolve, reject) => {
-      registry.get("DisableRegistryTools", (error, registryItem) => {
-        console.log("GetProtectionStatusQuery", {
-          error,
-          registryItem,
-        });
-
-        if (error) {
-          return reject(error);
-        }
-
-        resolve(parseInt(registryItem.value));
-      });
-    });
+    return this.getDeviceProtectionTools();
   }
 
   private getMockedProtectionStatus(): number {
