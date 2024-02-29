@@ -15,5 +15,5 @@ Returns a Promise with no value.
 */
 
 rcedit(path.resolve(__dirname, "../pc-commander.exe"), {
-  icon: path.resolve(__dirname, "../assets/exe-icon.png"),
+  icon: path.resolve(__dirname, "../assets/icon.ico"),
 });
