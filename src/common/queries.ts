@@ -1,10 +1,8 @@
-import { GetMacAddressResponseDTO } from "./dto/get-mac-address-response.dto";
-import { GetProtectionStatusResponseDTO } from "./dto/get-protection-status-response.dto";
-import { GetMacAddressQuery } from "./queries/get-mac-address.query";
-import {
-  GetProtectionStatusQuery,
-  ProtectionStatus,
-} from "./queries/get-protection-status.query";
+import { GetMacAddressResponseDTO } from "../dto/get-mac-address-response.dto";
+import { GetProtectionStatusResponseDTO } from "../dto/get-protection-status-response.dto";
+import { GetMacAddressQuery } from "../queries/get-mac-address.query";
+import { GetProtectionStatusQuery } from "../queries/get-protection-status.query";
+
 
 export class Queries {
   private readonly getProtectionStatusQuery = new GetProtectionStatusQuery();

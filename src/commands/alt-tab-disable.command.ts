@@ -1,7 +1,7 @@
 import chardet from "chardet";
 import path from "path";
 import { exec } from "child_process";
-import { config } from "../config";
+import { config } from "../common/config";
 
 export class AltTabDisableCommand {
   public async execute(): Promise<void> {

@@ -1,6 +1,6 @@
 import path from "path";
 import { exec } from "child_process";
-import { config } from "../config";
+import { config } from "../common/config";
 
 export class AltTabEnableCommand {
   public async execute(): Promise<void> {

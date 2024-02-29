@@ -1,4 +1,4 @@
-import { shutdown } from "../libs/node-shutdown-windows";
+import { shutdown } from "../common/node-shutdown-windows";
 
 export class DeviceShutdownCommand {
   public async execute(): Promise<void> {

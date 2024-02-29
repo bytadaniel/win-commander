@@ -2,14 +2,14 @@
   "name": "pc-commander",
   "version": "1.0.0",
   "description": "",
-  "main": "build/express.js",
-  "bin": "build/express.js",
+  "main": "build/index.js",
+  "bin": "build/index.js",
   "scripts": {
     "bundle": "npx esbuild src/index.ts --bundle --platform=node --outfile=bundle.js",
     "build": "npx tsc -d",
-    "pkg:osx": "npm run build && pkg . -t node16-osx -o pc-commander",
-    "pkg:win": "npm run build && pkg . -t node18-win -o pc-commander",
-    "start": "node build/express.js"
+    "pkg:osx": "npm run build && pkg . -t node16-osx --out-path=output",
+    "pkg:win": "npm run build && pkg . -t node18-win --out-path=output",
+    "start": "node build/index.js"
   },
   "pkg": {
     "targets": [
@@ -17,13 +17,11 @@
     ]
   },
   "keywords": [],
-  "author": "",
+  "author": "bytadaniel",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "@types/node-windows": "^0.1.6",
     "@types/winreg": "^1.2.36",
-    "@types/wol": "^1.0.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
@@ -31,11 +29,7 @@
     "chardet": "^2.0.0",
     "express": "^4.18.2",
     "getmac": "^6.6.0",
-    "nexe": "^4.0.0-rc.4",
-    "node-windows": "^1.0.0-beta.8",
     "pkg": "^5.8.1",
-    "rcedit": "^4.0.1",
-    "winreg": "^1.2.5",
-    "wol": "^1.0.7"
+    "winreg": "^1.2.5"
   }
 }

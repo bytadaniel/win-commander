@@ -1,4 +1,4 @@
-import { reboot } from "../libs/node-shutdown-windows";
+import { reboot } from "../common/node-shutdown-windows";
 
 export class DeviceRebootCommand {
   public async execute(): Promise<void> {

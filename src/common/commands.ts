@@ -1,9 +1,9 @@
-import { ProtectionDisableCommand } from "./commands/protection-disable.command";
-import { ProtectionEnableCommand } from "./commands/protection-enable.command";
-import { DeviceRebootCommand } from "./commands/device-reboot.command";
-import { DeviceShutdownCommand } from "./commands/device-shutdown.command";
-import { AltTabEnableCommand } from "./commands/alt-tab-enable.command";
-import { AltTabDisableCommand } from "./commands/alt-tab-disable.command";
+import { ProtectionDisableCommand } from "../commands/protection-disable.command";
+import { ProtectionEnableCommand } from "../commands/protection-enable.command";
+import { DeviceRebootCommand } from "../commands/device-reboot.command";
+import { DeviceShutdownCommand } from "../commands/device-shutdown.command";
+import { AltTabEnableCommand } from "../commands/alt-tab-enable.command";
+import { AltTabDisableCommand } from "../commands/alt-tab-disable.command";
 
 export class Commands {
   private readonly deviceRebootCommand = new DeviceRebootCommand();
