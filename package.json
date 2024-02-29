@@ -8,7 +8,7 @@
     "bundle": "npx esbuild src/index.ts --bundle --platform=node --outfile=bundle.js",
     "build": "npx tsc -d",
     "pkg:osx": "npm run build && pkg . -t node16-osx --out-path=output",
-    "pkg:win": "npm run build && pkg . -t node18-win --out-path=output",
+    "pkg:win": "npm run build && pkg . -t node18-win --out-path=output && node build/common/rcedit.js",
     "start": "node build/index.js"
   },
   "pkg": {
@@ -34,6 +34,7 @@
     "express": "^4.18.2",
     "getmac": "^6.6.0",
     "pkg": "^5.8.1",
+    "rcedit": "^4.0.1",
     "winreg": "^1.2.5"
   }
 }

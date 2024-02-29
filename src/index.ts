@@ -2,8 +2,6 @@ import express from "express";
 import { Commands } from "./common/commands";
 import { Queries } from "./common/queries";
 
-process.title = "PcCommanderService";
-
 const PORT = process.env.PORT || 5050;
 const app = express();
 
