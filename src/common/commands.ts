@@ -21,7 +21,7 @@ export class Commands {
     return this.deviceShutdownCommand.execute();
   }
 
-  public async protectionEnable(): Promise<void> {
+  public async protectionEnable(): Promise<any> {
     return this.protectionEnableCommand.execute();
   }
 

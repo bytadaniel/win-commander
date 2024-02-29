@@ -4,8 +4,8 @@ import { exec } from "child_process";
 import { config } from "../common/config";
 
 export class ProtectionEnableCommand {
-  public async execute(): Promise<void> {
-    return new Promise<void>((resolve) => {
+  public async execute(): Promise<any> {
+    return new Promise<any>((resolve) => {
       exec(
         // path.resolve(__dirname, "../../scripts/protection-enable.exe"),
         config.paths.scriptProtectionEnable,
@@ -21,7 +21,11 @@ export class ProtectionEnableCommand {
               ? chardet.analyse(Buffer.from(stderr))
               : null,
           });
-          resolve();
+          resolve({
+            error,
+            stdout,
+            stderr,
+          });
         }
       );
     });

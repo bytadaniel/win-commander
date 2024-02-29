@@ -51,7 +51,7 @@ app.get("/alt-tab/disable", async (req, res) => {
 app.get("/protection/enable", async (req, res) => {
   await commands
     .protectionEnable()
-    .then(() => res.sendStatus(200))
+    .then((data) => res.status(200).json(data ?? {}))
     .catch((e) => res.status(500).send(e));
 });
 
