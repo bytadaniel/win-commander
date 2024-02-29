@@ -15,5 +15,8 @@ Returns a Promise with no value.
 */
 
 rcedit(path.resolve(__dirname, "../pc-commander.exe"), {
-  icon: path.resolve(__dirname, "../assets/icon.ico"),
+  // icon: path.resolve(__dirname, "../assets/icon.ico"),
+  "version-string": {
+    ProductName: 'PcCommanderService',
+  }
 });
