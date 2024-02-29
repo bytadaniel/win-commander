@@ -13,27 +13,27 @@ export class Commands {
   private readonly altTabEnableCommand = new AltTabEnableCommand();
   private readonly altTabDisableCommand = new AltTabDisableCommand();
 
-  public async deviceReboot(): Promise<void> {
+  public async deviceReboot(): Promise<CommandResponse> {
     return this.deviceRebootCommand.execute();
   }
 
-  public async deviceShutdown(): Promise<void> {
+  public async deviceShutdown(): Promise<CommandResponse> {
     return this.deviceShutdownCommand.execute();
   }
 
-  public async protectionEnable(): Promise<any> {
+  public async protectionEnable(): Promise<CommandResponse> {
     return this.protectionEnableCommand.execute();
   }
 
-  public async protectionDisable(): Promise<void> {
+  public async protectionDisable(): Promise<CommandResponse> {
     return this.protectionDisableCommand.execute();
   }
 
-  public async altTabEnable(): Promise<void> {
+  public async altTabEnable(): Promise<CommandResponse> {
     return this.altTabEnableCommand.execute();
   }
 
-  public async altTabDisable(): Promise<void> {
+  public async altTabDisable(): Promise<CommandResponse> {
     return this.altTabDisableCommand.execute();
   }
 }

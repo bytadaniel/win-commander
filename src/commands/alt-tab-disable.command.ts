@@ -4,10 +4,9 @@ import { exec } from "child_process";
 import { config } from "../common/config";
 
 export class AltTabDisableCommand {
-  public async execute(): Promise<void> {
-    return new Promise<void>((resolve) => {
+  public async execute(): Promise<CommandResponse> {
+    return new Promise<CommandResponse>((resolve) => {
       exec(
-        // path.resolve(__dirname, "../../scripts/alt-tab-disable.exe"),
         config.paths.scriptAltDisable,
         (error, stdout, stderr) => {
           console.log("AltTabDisableCommand", {
@@ -19,7 +18,11 @@ export class AltTabDisableCommand {
               stderr: stderr ? chardet.analyse(Buffer.from(stderr)) : null,
             },
           });
-          resolve();
+          resolve({
+            error,
+            stdout,
+            stderr
+          });
         }
       );
     });

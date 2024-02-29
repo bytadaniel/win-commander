@@ -3,10 +3,9 @@ import { exec } from "child_process";
 import { config } from "../common/config";
 
 export class ProtectionDisableCommand {
-  public async execute(): Promise<void> {
-    return new Promise<void>((resolve) => {
+  public async execute(): Promise<CommandResponse> {
+    return new Promise<CommandResponse>((resolve) => {
       exec(
-        // path.resolve(__dirname, "../../scripts/protection-disable.exe"),
         config.paths.scriptProtectionDisable,
         (error, stdout, stderr) => {
           console.log("ProtectionDisableCommand", {
@@ -14,7 +13,11 @@ export class ProtectionDisableCommand {
             stdout,
             stderr,
           });
-          resolve();
+          resolve({
+            error,
+            stdout,
+            stderr
+          });
         }
       );
     });

@@ -3,8 +3,8 @@ import { exec } from "child_process";
 import { config } from "../common/config";
 
 export class AltTabEnableCommand {
-  public async execute(): Promise<void> {
-    return new Promise<void>((resolve) => {
+  public async execute(): Promise<CommandResponse> {
+    return new Promise<CommandResponse>((resolve) => {
       exec(
         // path.resolve(__dirname, "../../scripts/alt-tab-enable.exe"),
         config.paths.scriptAltEnable,
@@ -14,7 +14,11 @@ export class AltTabEnableCommand {
             stdout,
             stderr,
           });
-          resolve();
+          resolve({
+            error,
+            stdout,
+            stderr
+          });
         }
       );
     });
