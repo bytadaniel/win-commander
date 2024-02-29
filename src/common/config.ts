@@ -6,19 +6,19 @@ export const config = {
   paths: {
     scriptAltEnable: path.resolve(
       hardcodeScriptDirecotry,
-      "/scripts/alt-tab-enable.exe"
+      "./scripts/alt-tab-enable.exe"
     ),
     scriptAltDisable: path.resolve(
       hardcodeScriptDirecotry,
-      "/scripts/alt-tab-disable.exe"
+      "./scripts/alt-tab-disable.exe"
     ),
     scriptProtectionEnable: path.resolve(
       hardcodeScriptDirecotry,
-      "/scripts/protection-enable.exe"
+      "./scripts/protection-enable.exe"
     ),
     scriptProtectionDisable: path.resolve(
       hardcodeScriptDirecotry,
-      "/scripts/protection-disable.exe"
+      "./scripts/protection-disable.exe"
     ),
   },
 };
