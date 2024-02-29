@@ -2,14 +2,14 @@
   "name": "pc-commander",
   "version": "1.0.0",
   "description": "",
-  "main": "build/index.js",
-  "bin": "build/index.js",
+  "main": "build/express.js",
+  "bin": "build/express.js",
   "scripts": {
     "bundle": "npx esbuild src/index.ts --bundle --platform=node --outfile=bundle.js",
     "build": "npx tsc -d",
     "pkg:osx": "npm run build && pkg . -t osx -o pc-commander",
     "pkg:win": "npm run build && pkg . -t win -o pc-commander",
-    "start": "node build/index.js"
+    "start": "node build/express.js"
   },
   "pkg": {
     "targets": [
