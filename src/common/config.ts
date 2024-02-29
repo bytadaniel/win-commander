@@ -1,3 +1,4 @@
+import fs from "fs";
 import path from "path";
 
 console.log({
@@ -17,6 +18,7 @@ console.log({
     __dirname,
     "../../scripts/protection-disable.exe"
   ),
+  files: fs.readdirSync(path.resolve(__dirname, "../../scripts")),
 });
 
 export const config = {

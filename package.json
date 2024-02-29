@@ -12,6 +12,10 @@
     "start": "node build/index.js"
   },
   "pkg": {
+    "assets": [
+      "scripts/**",
+      "scripts/**/*"
+    ],
     "targets": [
       "node18"
     ]
