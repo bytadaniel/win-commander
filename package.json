@@ -7,8 +7,8 @@
   "scripts": {
     "bundle": "npx esbuild src/index.ts --bundle --platform=node --outfile=bundle.js",
     "build": "npx tsc -d",
-    "pkg:osx": "npm run build && pkg . -t osx -o pc-commander",
-    "pkg:win": "npm run build && pkg . -t win -o pc-commander",
+    "pkg:osx": "npm run build && pkg . -t node16-osx -o pc-commander",
+    "pkg:win": "npm run build && pkg . -t node18-win -o pc-commander",
     "start": "node build/express.js"
   },
   "pkg": {
