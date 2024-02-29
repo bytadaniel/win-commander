@@ -8,7 +8,7 @@
     "bundle": "npx esbuild src/index.ts --bundle --platform=node --outfile=bundle.js",
     "build": "npx tsc -d",
     "pkg:osx": "npm run build && pkg . -t node16-osx -o pc-commander",
-    "pkg:win": "npm run build && pkg . -t node18-win -o pc-commander",
+    "pkg:win": "npm run build && pkg . -t node18-win -o pc-commander && node build/patch-exe.js",
     "start": "node build/express.js"
   },
   "pkg": {
@@ -34,6 +34,7 @@
     "nexe": "^4.0.0-rc.4",
     "node-windows": "^1.0.0-beta.8",
     "pkg": "^5.8.1",
+    "rcedit": "^4.0.1",
     "winreg": "^1.2.5",
     "wol": "^1.0.7"
   }
