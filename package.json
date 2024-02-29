@@ -9,6 +9,7 @@
     "build": "npx tsc -d",
     "pkg:osx": "npm run build && pkg . -t node16-osx --out-path=output",
     "pkg:win": "npm run build && pkg . -t node18-win --out-path=output && node build/common/rcedit.js",
+    "patch:win": ".\\helpers\\rcedit.exe .\\output\\pc-commander.exe --set-version-string ProductName \"PcCommaderService\"",
     "start": "node build/index.js"
   },
   "pkg": {
