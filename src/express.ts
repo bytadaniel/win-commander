@@ -12,14 +12,14 @@ const queries = new Queries();
 
 app.use(express.json());
 
-app.post("/device/shutdown", async (req, res) => {
+app.get("/device/shutdown", async (req, res) => {
   await commands
     .deviceShutdown()
     .then(() => res.sendStatus(200))
     .catch((e) => res.status(500).send(e));
 });
 
-app.post("/device/reboot", async (req, res) => {
+app.get("/device/reboot", async (req, res) => {
   await commands
     .deviceReboot()
     .then(() => res.sendStatus(200))
@@ -34,28 +34,28 @@ app.get("/device/mac-address", (req, res) => {
   }
 });
 
-app.post("/alt-tab/enable", async (req, res) => {
+app.get("/alt-tab/enable", async (req, res) => {
   await commands
     .altTabEnable()
     .then(() => res.sendStatus(200))
     .catch((e) => res.status(500).send(e));
 });
 
-app.post("/alt-tab/disable", async (req, res) => {
+app.get("/alt-tab/disable", async (req, res) => {
   await commands
     .altTabDisable()
     .then(() => res.sendStatus(200))
     .catch((e) => res.status(500).send(e));
 });
 
-app.post("/protection/enable", async (req, res) => {
+app.get("/protection/enable", async (req, res) => {
   await commands
     .protectionEnable()
     .then(() => res.sendStatus(200))
     .catch((e) => res.status(500).send(e));
 });
 
-app.post("/protection/disable", async (req, res) => {
+app.get("/protection/disable", async (req, res) => {
   await commands
     .protectionDisable()
     .then(() => res.sendStatus(200))
