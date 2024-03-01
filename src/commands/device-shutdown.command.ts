@@ -5,7 +5,6 @@ export class DeviceShutdownCommand {
     return new Promise<CommandResponse>((resolve) => {
       const shutdownProcess = shutdown(0, true);
       shutdownProcess.on("close", () => {
-        console.log('ShutdownProcess close')
         resolve({
           error: null,
           stdout: "",
