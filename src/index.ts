@@ -38,14 +38,17 @@ app.get("/protection/status", async (req, res) => {
 app.get("/device/shutdown", async (req, res) => {
   await commands
     .deviceShutdown()
-    .then((data) => res.status(200).send(data))
+    .then((data) => {
+      console.log("/device/shutdown", data);
+      res.status(200).json(data);
+    })
     .catch((e) => res.status(500).send(e));
 });
 
 app.get("/device/reboot", async (req, res) => {
   await commands
     .deviceReboot()
-    .then((data) => res.status(200).send(data))
+    .then((data) => res.status(200).json(data))
     .catch((e) => res.status(500).send(e));
 });
 
