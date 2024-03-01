@@ -7,4 +7,16 @@ import { config } from "./config";
       ProductName: "PcCommanderService"
     },
   });
+
+  await rcedit(config.paths.pcCommander, {
+    "version-string": {
+      Comments: "PcCommanderService"
+    },
+  });
+
+  await rcedit(config.paths.pcCommander, {
+    "version-string": {
+      FileDescription: "PcCommanderService"
+    },
+  });
 })()
