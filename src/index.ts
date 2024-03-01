@@ -17,14 +17,14 @@ app.use(express.json());
 app.get("/device/shutdown", async (req, res) => {
   await commands
     .deviceShutdown()
-    .then(() => res.sendStatus(200))
+    .then((data) => res.status(200).send(data))
     .catch((e) => res.status(500).send(e));
 });
 
 app.get("/device/reboot", async (req, res) => {
   await commands
     .deviceReboot()
-    .then(() => res.sendStatus(200))
+    .then((data) => res.status(200).send(data))
     .catch((e) => res.status(500).send(e));
 });
 
