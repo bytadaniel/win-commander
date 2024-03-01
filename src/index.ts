@@ -14,20 +14,6 @@ app.use(express.json());
  * Queries
  */
 
-app.get("/device/shutdown", async (req, res) => {
-  await commands
-    .deviceShutdown()
-    .then((data) => res.status(200).send(data))
-    .catch((e) => res.status(500).send(e));
-});
-
-app.get("/device/reboot", async (req, res) => {
-  await commands
-    .deviceReboot()
-    .then((data) => res.status(200).send(data))
-    .catch((e) => res.status(500).send(e));
-});
-
 app.get("/device/mac-address", (req, res) => {
   try {
     res.status(200).json(queries.macAddress());
@@ -48,6 +34,20 @@ app.get("/protection/status", async (req, res) => {
 /**
  * Commands
  */
+
+app.get("/device/shutdown", async (req, res) => {
+  await commands
+    .deviceShutdown()
+    .then((data) => res.status(200).send(data))
+    .catch((e) => res.status(500).send(e));
+});
+
+app.get("/device/reboot", async (req, res) => {
+  await commands
+    .deviceReboot()
+    .then((data) => res.status(200).send(data))
+    .catch((e) => res.status(500).send(e));
+});
 
 app.get("/alt-tab/enable", async (req, res) => {
   await commands
