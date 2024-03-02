@@ -1,16 +1,22 @@
-import { shutdown } from "../common/node-shutdown-windows";
+import { forceShutdown } from "@napi-rs/system-shutdown";
 
 export class DeviceShutdownCommand {
   public async execute(): Promise<CommandResponse> {
     return new Promise<CommandResponse>((resolve) => {
-      const shutdownProcess = shutdown(0, true);
-      shutdownProcess.on("close", () => {
+      try {
+        forceShutdown()
         resolve({
           error: null,
           stdout: "",
           stderr: "",
         });
-      });
-    });
+      } catch (error) {
+        resolve({
+          error: error as Error,
+          stdout: "",
+          stderr: "",
+        });
+      }
+    })
   }
 }
