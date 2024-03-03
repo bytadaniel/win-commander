@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@napi-rs/system-shutdown": "^1.0.0",
-    "chardet": "^2.0.0",
     "express": "^4.18.2",
     "getmac": "^6.6.0",
     "pkg": "^5.8.1",

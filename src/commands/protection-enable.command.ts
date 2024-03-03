@@ -1,5 +1,3 @@
-import chardet from "chardet";
-import path from "path";
 import { exec } from "child_process";
 import { config } from "../common/config";
 
@@ -13,12 +11,6 @@ export class ProtectionEnableCommand {
             error,
             stdout,
             stderr,
-            encodingAnalysisStdout: stdout
-              ? chardet.analyse(Buffer.from(stdout))
-              : null,
-            encodingAnalysisStderr: stderr
-              ? chardet.analyse(Buffer.from(stderr))
-              : null,
           });
           resolve({
             error,

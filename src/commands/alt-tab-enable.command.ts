@@ -6,7 +6,6 @@ export class AltTabEnableCommand {
   public async execute(): Promise<CommandResponse> {
     return new Promise<CommandResponse>((resolve) => {
       exec(
-        // path.resolve(__dirname, "../../scripts/alt-tab-enable.exe"),
         config.paths.scriptAltEnable,
         (error, stdout, stderr) => {
           console.log("AltTabEnableCommand", {
